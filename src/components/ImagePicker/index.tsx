@@ -22,7 +22,7 @@ const ImagePicker: FC<ImagePickerProps> = ({ onChange, label }) => {
       <div className="label p-0">
         <span className="label-text">{label}</span>
       </div>
-      <div className="w-full max-w-xs border border-gray-200 rounded-lg">
+      <div className="w-full border border-gray-200 rounded-lg mb-4">
         <div className="flex w-full justify-center">
           <img className="flex w-28" src={image === null ? BookPlaceholderImage : URL.createObjectURL(image)} alt='book cover' />
         </div>
@@ -30,7 +30,7 @@ const ImagePicker: FC<ImagePickerProps> = ({ onChange, label }) => {
           accept="image/*"
           type="file"
           onChange={handleImageChange}
-          className="file-input w-full max-w-xs  border border-gray-200 rounded-lg"
+          className="file-input w-full border border-gray-200 rounded-lg"
         />
       </div>
     </div>

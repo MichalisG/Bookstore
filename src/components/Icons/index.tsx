@@ -1,5 +1,5 @@
 import Plus from "./Plus";
-
+import Trash from "./trash";
 export default class Icons {
   static Search() {
     return (
@@ -30,5 +30,8 @@ export default class Icons {
 
   static Add() {
     return <Plus />
+  }
+  static Remove() {
+    return <Trash />
   }
 }

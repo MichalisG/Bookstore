@@ -43,7 +43,7 @@ const Multiselect: FC<MultiselectProps> = (props: MultiselectProps) => {
   }, [selected])
 
   return (
-    <div className="relative w-80 text-sm">
+    <div className="relative text-sm">
       <div className="w-full  svelte-1l8159u">
       <div className="label p-0">
         <span className="label-text">{label}</span>
@@ -52,7 +52,7 @@ const Multiselect: FC<MultiselectProps> = (props: MultiselectProps) => {
           <div className="flex flex-auto flex-wrap">
             {selected.map((option) => {
               return (
-                <div key={option} className="flex justify-center items-center m-1 font-medium py-1 px-2 bg-white rounded-full text-teal-700 bg-teal-100 border border-teal-300 ">
+                <div key={option} className="flex justify-center items-center m-1 font-medium py-1 px-2 bg-white rounded-full text-primary border border-primary ">
                   <div className="text-xs font-normal leading-none max-w-full flex-initial">{option}</div>
                   <div className="flex flex-auto flex-row-reverse">
                     <div
@@ -86,11 +86,11 @@ const Multiselect: FC<MultiselectProps> = (props: MultiselectProps) => {
               filteredTags.map((option) => (
                 <div
                   key={option}
-                  className="cursor-pointer w-full border-gray-100 rounded-t border-b hover:bg-teal-100"
+                  className="cursor-pointer w-full border-gray-100 rounded-t border-b hover:bg-primary"
                   onMouseDown={(e) => e.preventDefault()}
                   onClick={handleAddOption(option)}
                 >
-                  <div className="flex w-full items-center p-2 pl-2 border-transparent border-l-2 relative hover:border-teal-100">
+                  <div className="flex w-full items-center p-2 pl-2 border-transparent border-l-2 relative hover:border-primary-100">
                     <div className="w-full items-center flex">
                       <div className="mx-2 leading-6  ">{option} </div>
                     </div>
@@ -98,8 +98,8 @@ const Multiselect: FC<MultiselectProps> = (props: MultiselectProps) => {
                 </div>
               ))
             ) : (
-              <div className="cursor-pointer w-full border-gray-100 rounded-t border-b hover:bg-teal-100">
-                <div className="flex w-full items-center p-2 pl-2 border-transparent border-l-2 relative hover:border-teal-100">
+              <div className="cursor-pointer w-full border-gray-100 rounded-t border-b hover:bg-primary">
+                <div className="flex w-full items-center p-2 pl-2 border-transparent border-l-2 relative hover:border-primary">
                   <div className="w-full items-center flex">
                     <div className="mx-2 leading-6  ">No options available </div>
                   </div>

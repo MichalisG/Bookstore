@@ -5,7 +5,7 @@ import Input from '../components/Input';
 import PlusIcon from '../components/Icons/Plus';
 import Multiselect from '../components/Multiselect';
 import ImagePicker from '../components/ImagePicker';
-
+import Icons from '../components/Icons';
 interface NewBookFormProps {}
 
 const tags = [
@@ -160,19 +160,20 @@ const NewBookForm: FC<NewBookFormProps> = () => {
       />
       {authorIndex !== 0 && (
         <button
-          className='btn'
+          className='btn btn-outline btn-accent btn-sm m-2'
           onClick={() => removeAuthorField(index, authorIndex)}
         >
-          Remove
+          <Icons.Remove/>
         </button>
       )}
       </div>
       {authorIndex === formik.values.books[index].authors.length - 1 &&  formik.values.books[index].authors.length < 3 && (
         <button
-          className='btn'
+          className='btn btn-outline btn-secondary'
           onClick={() => addAuthorField(index)}
         >
-          + Add Another Author
+          <Icons.Add/>
+          Add Another Author
         </button>
       )}
     </div>
@@ -183,7 +184,9 @@ const NewBookForm: FC<NewBookFormProps> = () => {
       <form id='newBook' onSubmit={formik.handleSubmit}>
         {
           formik.values.books.map((book, index) => (
-            <div key={index}>
+            <div className='border p-4 m-4 rounded-lg'>
+            <div key={index} className='grid grid-cols-1 md:grid-cols-2 gap-8'>
+              <div>
               <ImagePicker
                 label='Book Cover'
                 onChange={handleImageChange(index)}
@@ -199,22 +202,31 @@ const NewBookForm: FC<NewBookFormProps> = () => {
                 }}
               />
               {renderAuthorsField(index)}
+              </div>
+              <div>
               {renderTextInput(index, 'Published', 'published')}
               {renderTextInput(index, 'Pages', 'pages')}
               {renderTextInput(index, 'Rating', 'rating')}
               {renderTextInput(index, 'ISBN10', 'ISBN10')}
               {renderTextInput(index, 'ISBN13', 'ISBN13')}
-              <div onClick={() => removeBook(index)}>
-                Remove book
+              </div>
+              </div>
+              <div className='flex justify-end'>
+                <button className='max-w-sm btn btn-accent btn-md' onClick={() => removeBook(index)}>
+                  <Icons.Remove/>
+                  Remove book
+                </button>
               </div>
             </div>
           ))
         }
-          <button className="btn" onClick={addBook}>
+        <div className='w-full flex justify-end'>
+          <button className="btn btn-neutral m-4" onClick={addBook}>
             <PlusIcon />
             Add Another Book
           </button>
-        <button type='submit'>Save</button>
+        </div>
+        <button className="btn btn-primary m-4 w-28" type='submit'>Save</button>
       </form>
     </div>
   );

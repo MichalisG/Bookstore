@@ -30,7 +30,7 @@ const Input: FC<InputProps> = (props: InputProps) => {
   const errorClass = error ? 'input-error' : ''
 
   return (
-    <label className="form-control w-full max-w-xs">
+    <label className="form-control w-full">
       <div className="label p-0">
         <span className="label-text">{label}</span>
       </div>
@@ -39,7 +39,7 @@ const Input: FC<InputProps> = (props: InputProps) => {
         placeholder={placeholder}
         value={value}
         onChange={onChange}
-        className={`focus:outline-none input input-bordered w-full max-w-xs ${errorClass}`}
+        className={`focus:outline-none input input-bordered w-full ${errorClass}`}
         {...rest}
       />
       <div className="label p-0">
