@@ -1,13 +1,16 @@
 import type { ChangeEvent, FC } from 'react';
 import Input from '../components/Input';
 import { useSearchParams } from 'react-router-dom';
+import Books from '../components/Books';
+import { useSearchBooks } from '../hooks/useSearchBooks';
 
 interface SearchProps {}
 
 const Search: FC<SearchProps> = () => {
   let [searchParams, setSearchParams] = useSearchParams();
-
   const value = searchParams.get('value') ?? ''
+  const {books} = useSearchBooks(value)
+
   return (
     <div className='p-8'>
       <h1 className='w-full text-center mb-4 text-2xl font-bold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl'>Search to find your new book</h1>
@@ -18,6 +21,7 @@ const Search: FC<SearchProps> = () => {
           setSearchParams(`value=${e.target.value}`)
         }}
       />
+      <Books books={books}/>
     </div>
   );
 }
