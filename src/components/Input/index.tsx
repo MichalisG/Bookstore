@@ -8,6 +8,9 @@ interface InputProps {
   placeholder?: string;
   value?: string;
   onChange?: any;
+  onFocus?: any;
+  onBlur?: any;
+  onKeyDown?: any;
   error?: boolean;
   errorMessage?: string;
 }

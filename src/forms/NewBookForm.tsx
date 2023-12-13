@@ -3,8 +3,23 @@ import {useFormik, getIn} from 'formik';
 import * as Yup from 'yup';
 import Input from '../components/Input';
 import PlusIcon from '../components/Icons/Plus';
+import Multiselect from '../components/Multiselect';
+import ImagePicker from '../components/ImagePicker';
 
 interface NewBookFormProps {}
+
+const tags = [
+  "Tutorial",
+  "HowTo",
+  "DIY",
+  "Review",
+  "Tech",
+  "Gaming",
+  "Travel",
+  "Fitness",
+  "Cooking",
+  "Vlog",
+];
 
 const NewBookForm: FC<NewBookFormProps> = () => {
 
@@ -16,9 +31,19 @@ const NewBookForm: FC<NewBookFormProps> = () => {
       .required('Title is required'),
     description: Yup.string()
       .max(512, 'Description should not exceed 512 characters')
-      .matches(/^[A-Z].*/, 'Description should start with an uppercase letter'),
+      .matches(/^[A-Z].*/, 'Description should start with an uppercase letter')
+      .required('Description is required'),
     categories: Yup.array().max(4, 'Maximum of 4 categories allowed'),
-    authors: Yup.array().max(3, 'Maximum of 3 authors allowed'),
+    authors: Yup.array()
+      .of(
+        Yup.string()
+          .min(5, 'Author should be at least 5 characters')
+          .max(60, 'Author should not exceed 60 characters')
+          .required('Author should be at least 5 characters'),
+      )
+      .min(1, "You can't leave this blank.")
+      .required("You can't leave this blank.")
+      .max(3, 'Maximum of 3 authors allowed'),
     publisher: Yup.string()
       .min(5, 'Publisher should be at least 5 characters')
       .max(60, 'Publisher should not exceed 60 characters'),
@@ -84,6 +109,27 @@ const NewBookForm: FC<NewBookFormProps> = () => {
     formik.setValues({ ...formik.values, books });
   };
 
+  const addAuthorField = (index: number) => {
+    const updatedBooks = formik.values.books.map((book, i) =>
+      i === index ? { ...book, authors: [...book.authors, ''] } : book
+    );
+    formik.setValues({ ...formik.values, books: updatedBooks });
+  };
+
+  const removeAuthorField = (bookIndex: number, authorIndex: number) => {
+    const updatedBooks = formik.values.books.map((book, i) =>
+      i === bookIndex ? { ...book, authors: book.authors.filter((_, j) => j !== authorIndex) } : book
+    );
+    formik.setValues({ ...formik.values, books: updatedBooks });
+  };
+
+  const handleImageChange = (index: number) => (file: {}) => {
+    console.log("🚀 ~ file: NewBookForm.tsx:127 ~ handleImageChange ~ file:", file)
+    if (file) {
+      formik.setFieldValue(`books[${index}].coverImage`, file); // Update form value with selected file
+    }
+  };
+
   const renderTextInput = (index: number, label: string, name: string) => (
     <Input
       label={label}
@@ -98,14 +144,61 @@ const NewBookForm: FC<NewBookFormProps> = () => {
     />
   )
 
+  const renderAuthorsField = (index: number) => formik.values.books[index].authors.map((author: string, authorIndex: number) => (
+    <div key={authorIndex}>
+      <div className='flex items-center'>
+      <Input
+        id={`author-${index}-${authorIndex}`}
+        name={`books[${index}].authors[${authorIndex}]`}
+        label={`Author ${authorIndex + 1}`}
+        value={formik.values.books[index].authors[authorIndex]}
+        onChange={formik.handleChange}
+        error={
+          getIn(formik.touched, `books[${index}].authors[${authorIndex}]`) && Boolean(getIn(formik.errors, `books[${index}].authors[${authorIndex}]`))
+        }
+        errorMessage={getIn(formik.errors, `books[${index}].authors[${authorIndex}]`)}
+      />
+      {authorIndex !== 0 && (
+        <button
+          className='btn'
+          onClick={() => removeAuthorField(index, authorIndex)}
+        >
+          Remove
+        </button>
+      )}
+      </div>
+      {authorIndex === formik.values.books[index].authors.length - 1 &&  formik.values.books[index].authors.length < 3 && (
+        <button
+          className='btn'
+          onClick={() => addAuthorField(index)}
+        >
+          + Add Another Author
+        </button>
+      )}
+    </div>
+  ))
+
   return (
     <div>
       <form id='newBook' onSubmit={formik.handleSubmit}>
         {
           formik.values.books.map((book, index) => (
             <div key={index}>
+              <ImagePicker
+                label='Book Cover'
+                onChange={handleImageChange(index)}
+              />
               {renderTextInput(index, 'Title', 'title')}
               {renderTextInput(index, 'Description', 'description')}
+              <Multiselect
+                label='Categories (max 3)'
+                options={tags}
+                maxSelected={3}
+                onChange={(categories: string[])=>{
+                  formik.setFieldValue(`books[${index}].categories`, categories);
+                }}
+              />
+              {renderAuthorsField(index)}
               {renderTextInput(index, 'Published', 'published')}
               {renderTextInput(index, 'Pages', 'pages')}
               {renderTextInput(index, 'Rating', 'rating')}
