@@ -10,13 +10,7 @@ import Home from './pages/Home';
 import Layout from './layouts/main';
 import AddNewBook from './pages/AddNewBook';
 import Search from './pages/Search';
-import {
-  RecoilRoot,
-  atom,
-  selector,
-  useRecoilState,
-  useRecoilValue,
-} from 'recoil';
+import {RecoilRoot} from 'recoil';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
