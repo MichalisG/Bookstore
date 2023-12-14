@@ -3,6 +3,8 @@ import Trash from "./trash";
 import Cart from "./Cart";
 import Heart from "./Heart";
 import Share from "./Share";
+import Left from "./Left";
+import Right from "./Right";
 export default class Icons {
   static Search() {
     return (
@@ -45,5 +47,11 @@ export default class Icons {
   }
   static Share() {
     return <Share />
+  }
+  static Left() {
+    return <Left />
+  }
+  static Right() {
+    return <Right />
   }
 }
