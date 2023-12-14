@@ -15,7 +15,7 @@ const Card: FC<Props> = (props) => {
     image
   } = props;
   return (
-    <div className="card w-56 bg-base-100 shadow-xl m-4">
+    <div className="card w-56 bg-base-100 shadow-md m-4 pt-4">
       <figure className="h-40">
         {image ? <img src={image} alt="Shoes" className="rounded-xl h-40" /> : null}
       </figure>
@@ -23,7 +23,7 @@ const Card: FC<Props> = (props) => {
         <Rating/>
       </div>
       <div className="card-body items-center text-center">
-        <h4 className="text-sm font-medium">{title}</h4>
+        <h4 className="text-sm font-medium h-20">{title}</h4>
         <div className="card-actions">
           {button ? <button className="btn btn-primary btn-sm">{button}</button> : null}
         </div>
