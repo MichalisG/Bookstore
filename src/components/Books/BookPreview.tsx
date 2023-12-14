@@ -15,7 +15,7 @@ const BookPreview: FC<BookPreviewProps> = ({book}) => {
           <img src={book.coverImage} alt="book cover" className='w-60 h-auto'/>
         </div>
         <div className='mt-4'>
-          <p><b>Author:</b> {book.author}</p>
+          <p><b>Authors:</b> {book.author}</p>
         </div>
       </div>
       <div className='pr-20 flex justify-start flex-col'>
