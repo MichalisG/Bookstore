@@ -1,5 +1,8 @@
 import Plus from "./Plus";
 import Trash from "./trash";
+import Cart from "./Cart";
+import Heart from "./Heart";
+import Share from "./Share";
 export default class Icons {
   static Search() {
     return (
@@ -33,5 +36,14 @@ export default class Icons {
   }
   static Remove() {
     return <Trash />
+  }
+  static Cart() {
+    return <Cart />
+  }
+  static Heart() {
+    return <Heart />
+  }
+  static Share() {
+    return <Share />
   }
 }
