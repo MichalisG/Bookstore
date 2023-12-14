@@ -11,12 +11,14 @@ import Layout from './layouts/main';
 import AddNewBook from './pages/AddNewBook';
 import Search from './pages/Search';
 import {RecoilRoot} from 'recoil';
+import BookPage from './pages/Book';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<Layout />}>
       <Route index element={<Home/>}/>
-      <Route path='book/add' element={<AddNewBook/>}/>
+      <Route path='books/add' element={<AddNewBook/>}/>
+      <Route path='books/:bookId' element={<BookPage/>}/>
       <Route path='search' element={<Search/>}/>
     </Route>
   )
