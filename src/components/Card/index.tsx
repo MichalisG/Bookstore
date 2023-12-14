@@ -8,6 +8,8 @@ interface Props {
   image?: string;
 }
 
+const getRandomArbitrary = (min: number, max: number) => Math.random() * (max - min) + min;
+
 const Card: FC<Props> = (props) => {
   const {
     title,
@@ -24,6 +26,7 @@ const Card: FC<Props> = (props) => {
       </div>
       <div className="card-body items-center text-center">
         <h4 className="text-sm font-medium h-20">{title}</h4>
+        <p className='text-accent'>${(getRandomArbitrary(1000, 10000) / 100).toFixed(2)}</p>
         <div className="card-actions">
           {button ? <button className="btn btn-primary btn-sm">{button}</button> : null}
         </div>
