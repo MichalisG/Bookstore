@@ -46,17 +46,25 @@ const NewBookForm: FC<NewBookFormProps> = () => {
       .max(3, 'Maximum of 3 authors allowed'),
     publisher: Yup.string()
       .min(5, 'Publisher should be at least 5 characters')
-      .max(60, 'Publisher should not exceed 60 characters'),
-    published: Yup.string().matches(/^\d{4}$/, 'Enter a valid year'),
+      .max(60, 'Publisher should not exceed 60 characters')
+      .required('Description is required'),
+    published: Yup.string()
+      .matches(/^\d{4}$/, 'Enter a valid year')
+      .required('Description is required'),
     pages: Yup.number()
       .typeError('Enter a valid number')
-      .max(9999, 'Number of pages should not exceed 9999'),
+      .max(9999, 'Number of pages should not exceed 9999')
+      .required('Description is required'),
     rating: Yup.string()
       .max(20, 'Rating should not exceed 20 characters')
-      .matches(/^[A-Z].*/, 'Rating should start with an uppercase letter'),
-    ISBN10: Yup.string().matches(/^\d{10}$/, 'Enter a valid ISBN-10'),
+      .matches(/^[A-Z].*/, 'Rating should start with an uppercase letter')
+      .required('Description is required'),
+    ISBN10: Yup.string()
+      .matches(/^\d{10}$/, 'Enter a valid ISBN-10')
+      .required('Description is required'),
     ISBN13: Yup.string().matches(/^\d{13}$/, 'Enter a valid ISBN-13'),
-    coverImage: Yup.object().nullable(),
+    coverImage: Yup.object().nullable()
+      .required('Description is required'),
   });
 
   const schema = Yup.object().shape({
@@ -184,7 +192,7 @@ const NewBookForm: FC<NewBookFormProps> = () => {
       <form id='newBook' onSubmit={formik.handleSubmit}>
         {
           formik.values.books.map((book, index) => (
-            <div className='border p-4 m-4 rounded-lg'>
+            <div className='border p-4 m-4 rounded-lg card bg-base-100'>
             <div key={index} className='grid grid-cols-1 md:grid-cols-2 gap-8'>
               <div>
               <ImagePicker
