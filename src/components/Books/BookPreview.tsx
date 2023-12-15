@@ -7,6 +7,8 @@ interface BookPreviewProps {
   book: IBook
 }
 
+const getRandomArbitrary = (min: number, max: number) => Math.random() * (max - min) + min;
+
 const BookPreview: FC<BookPreviewProps> = ({book}) => {
   return (
     <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
@@ -44,7 +46,12 @@ const BookPreview: FC<BookPreviewProps> = ({book}) => {
         <div className='flex flex-col mt-4'>
           <p><b>ISBN-10:</b> {book.isbn}</p>
         </div>
+        <div className='flex mt-4'>
+          <b>Price:</b>
+          <p className='text-accent ml-2'>${(getRandomArbitrary(1000, 10000) / 100).toFixed(2)}</p>
+        </div>
         <div className='mt-4'>
+
           <button className='btn w-40 btn-primary mt-2'><Icons.Cart/> Buy</button>
         </div>
       </div>
