@@ -21,7 +21,7 @@ const Home = (props: Props) => {
         </div>
       </div>
       <div className='p-8'>
-        <Title title='Reviews'/>
+        <Title title='Popular'/>
         <Carousel books={shuffleArray(books)}/>
       </div>
       <div className="hero bg-base-100">
