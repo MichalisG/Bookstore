@@ -3,6 +3,7 @@ import heroImage from '../assets/image-1.png'
 import { useSearchBooks } from '../hooks/useSearchBooks'
 import Carousel from '../components/Carousel/Carousel'
 import { shuffleArray } from '../utils/array'
+import Title from '../components/Title'
 type Props = {}
 
 const Home = (props: Props) => {
@@ -20,7 +21,7 @@ const Home = (props: Props) => {
         </div>
       </div>
       <div className='p-8'>
-        <h2 className='text-2xl font-bold p-4'>Popular</h2>
+        <Title title='Reviews'/>
         <Carousel books={shuffleArray(books)}/>
       </div>
       <div className="hero bg-base-100">
@@ -35,7 +36,7 @@ const Home = (props: Props) => {
         </div>
       </div>
       <div className='p-8'>
-        <h2 className='text-2xl font-bold p-4'>Best Sellers of the Week</h2>
+        <Title title='Best Sellers of the Week'/>
         <Carousel books={shuffleArray(books)}/>
       </div>
     </div>

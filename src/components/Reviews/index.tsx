@@ -8,8 +8,7 @@ interface ReviewsProps {
 // This is a mock component for now 
 const Reviews: FC<ReviewsProps> = ({ reviews }) => {
   return (
-    <div className=''>
-      <h2 className='text-2xl font-bold p-4'>Reviews</h2>
+    <div className='mt-12'>
       {
         reviews.map((_, i) => (
           <Review index={i}/>

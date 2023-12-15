@@ -7,6 +7,8 @@ import Reviews from '../components/Reviews';
 import Carousel from '../components/Carousel/Carousel';
 import { useSearchBooks } from '../hooks/useSearchBooks';
 import { shuffleArray } from '../utils/array';
+import Title from '../components/Title';
+
 interface BookPageProps {}
 
 const BookPage: FC<BookPageProps> = () => {
@@ -24,9 +26,10 @@ const BookPage: FC<BookPageProps> = () => {
     <div className='p-8'>
       <BookPreview book={book}/>
       <div className='pb-8 pt-8'>
-        <h2 className='text-2xl font-bold p-4'>Other Books you may like</h2>
+        <Title title='Other Books you may like'/>
         <Carousel books={shuffleArray(books)}/>
       </div>
+      <Title title='Reviews'/>
       <Reviews reviews={[1,2,3,4]}/>
     </div>
   ) : null; // TODO add skeleton
